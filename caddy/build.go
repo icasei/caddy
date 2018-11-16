@@ -38,7 +38,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"github.com/caddyserver/builds"
+	"github.com/icasei/builds"
 )
 
 var goos, goarch, goarm string
