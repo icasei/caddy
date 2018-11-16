@@ -67,8 +67,8 @@ func maintainAssets(stopChan chan struct{}) {
 	for {
 		select {
 		case <-renewalTicker.C:
-			log.Println("[INFO] Scanning for expiring certificates")
-			RenewManagedCertificates(false)
+			log.Println("[INFO] Scanning for expiring certificates [disabled]")
+			//RenewManagedCertificates(false)
 			log.Println("[INFO] Done checking certificates")
 		case <-ocspTicker.C:
 			log.Println("[INFO] Scanning for stale OCSP staples")
@@ -172,7 +172,7 @@ func RenewManagedCertificates(allowPrompts bool) (err error) {
 		// Renewal queue
 		for _, oldCert := range renewQueue {
 			timeLeft := oldCert.NotAfter.Sub(time.Now().UTC())
-			log.Printf("[INFO] Certificate for %v expires in %v; attempting renewal", oldCert.Names, timeLeft)
+			log.Printf("[INFO] Certificate for %v expires in %v; attempting renewal [from maintain]", oldCert.Names, timeLeft)
 
 			// Get the name which we should use to renew this certificate;
 			// we only support managing certificates with one name per cert,

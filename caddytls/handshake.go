@@ -406,7 +406,7 @@ func (cfg *Config) handshakeMaintenance(name string, cert Certificate) (Certific
 	// Check cert expiration
 	timeLeft := cert.NotAfter.Sub(time.Now().UTC())
 	if timeLeft < RenewDurationBefore {
-		log.Printf("[INFO] Certificate for %v expires in %v; attempting renewal", cert.Names, timeLeft)
+		log.Printf("[INFO] Certificate for %v expires in %v; attempting renewal [from handshake]", cert.Names, timeLeft)
 		return cfg.renewDynamicCertificate(name, cert)
 	}
 

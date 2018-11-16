@@ -27,7 +27,7 @@ func activateHTTPS(cctx caddy.Context) error {
 	operatorPresent := !caddy.Started()
 
 	if !caddy.Quiet && operatorPresent {
-		fmt.Print("Activating privacy features... ")
+		fmt.Print("[Caddy iCasei] Activating privacy features... ")
 	}
 
 	ctx := cctx.(*httpContext)
@@ -62,10 +62,11 @@ func activateHTTPS(cctx caddy.Context) error {
 	// on the ports we'd need to do ACME before we finish starting; parent process
 	// already running renewal ticker, so renewal won't be missed anyway.)
 	if !caddy.IsUpgrade() {
-		err = caddytls.RenewManagedCertificates(true)
-		if err != nil {
-			return err
-		}
+		// TODO: vcaetano RenewManagedCertificates disabled.
+		//err = caddytls.RenewManagedCertificates(true)
+		//if err != nil {
+		//	return err
+		//}
 	}
 
 	if !caddy.Quiet && operatorPresent {
